@@ -1,1 +1,18 @@
 <h1>Hello world!</h1>
+
+
+<script>
+    //microCMSからコンテンツを取得
+    fetch("https://test.microcms.io/api/v1/blogs?fields=id,title", {
+        headers: {
+            "X-MICROCMS-API-KEY": "580dc7ddbfe5469692e362860f9bfd91cf8b"
+        }
+    })
+        .then(result => result.json())
+        .then(json => {
+            //画面表示
+            const list = json.contents.map(content => `<li><a href="detail.html?id=${content.id}">${content.title}</a></li>`).join('\n')
+            document.getElementById('blogs').innerHTML = list
+        });
+</script>
+<ul id="blogs"></ul>
